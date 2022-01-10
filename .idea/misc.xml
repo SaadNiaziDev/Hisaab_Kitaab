@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Saad Niazi/AndroidStudioProjects/Hisaab_Kitaab/app/src/main/res/drawable/button_bg.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/Saad Niazi/AndroidStudioProjects/Hisaab_Kitaab/app/src/main/res/drawable/rounded_card.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/Saad Niazi/AndroidStudioProjects/Hisaab_Kitaab/app/src/main/res/layout/activity_home_screen.xml" value="0.25" />
+        <entry key="..\:/Users/Saad Niazi/AndroidStudioProjects/Hisaab_Kitaab/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Saad Niazi/AndroidStudioProjects/Hisaab_Kitaab2/app/src/main/res/layout/activity_main.xml" value="0.22037037037037038" />
       </map>
     </option>

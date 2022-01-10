@@ -13,7 +13,7 @@
         android:layout_height="500dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:background="#2C9FAE"
+        android:background="@drawable/rounded_card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
@@ -30,6 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.485"
             app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/button_bg"
             app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
         <EditText
