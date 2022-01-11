@@ -99,14 +99,27 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="185dp"
-        android:layout_height="153dp"
+        android:layout_height="0dp"
         android:layout_marginTop="44dp"
+        android:layout_marginBottom="442dp"
         android:contentDescription="hheeeh"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/presence_away"
         tools:ignore="ImageContrastCheck"
         tools:srcCompat="@android:drawable/presence_away" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="44dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
