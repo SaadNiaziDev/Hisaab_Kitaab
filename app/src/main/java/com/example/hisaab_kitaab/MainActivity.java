@@ -15,12 +15,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new SignInFragment()).commit();
         View login = findViewById(R.id.signInBtn);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new SignInFragment()).commit();
-            }
-        });
+//        login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new SignInFragment()).commit();
+//            }
+//        });
     }
 }
