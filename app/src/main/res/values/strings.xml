@@ -14,9 +14,11 @@
     <string name="signup">SignUp</string>
     <string name="signin">SignIn</string>
     <string name="hisaab_kitaab">HISAAB KITAAB</string>
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">EMAIL</string>
     <string name="password">PASSWORD</string>
     <string name="signinfragment">SIGNIN</string>
+    <string name="hintText">**********</string>
+    <string name="emailPlaceholder">abcd@gmail.com</string>
 </resources>

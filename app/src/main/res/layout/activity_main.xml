@@ -9,8 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardView"
-        android:layout_width="300dp"
-        android:layout_height="500dp"
+        android:layout_width="324dp"
+        android:layout_height="580dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/rounded_card"
@@ -22,8 +22,8 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="303dp"
-            android:layout_height="45dp"
+            android:layout_width="322dp"
+            android:layout_height="51dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
