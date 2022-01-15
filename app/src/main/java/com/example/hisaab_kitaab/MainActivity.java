@@ -15,19 +15,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new SignInFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new fragment_login()).commit();
         signInBtn = findViewById(R.id.signInBtn);
         signUpBtn = findViewById(R.id.signUpBtn);
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new SignInFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new fragment_login()).commit();
             }
         });
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new SignUpFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,new fragment_register()).commit();
             }
         });
     }
