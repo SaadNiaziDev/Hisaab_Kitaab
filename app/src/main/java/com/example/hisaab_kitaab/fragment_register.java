@@ -1,5 +1,7 @@
 package com.example.hisaab_kitaab;
 
+import static android.icu.text.DisplayContext.LENGTH_SHORT;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,58 +9,64 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link fragment_register#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class fragment_register extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public fragment_register() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_register.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static fragment_register newInstance(String param1, String param2) {
-        fragment_register fragment = new fragment_register();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    Button register;
+    EditText et_email,et_password,et_repassword,et_name;
+    private DBHandler dbHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_register, container, false);
+        register = rootView.findViewById(R.id.btn_register);
+        et_email= rootView.findViewById(R.id.et_email);
+        et_password=rootView.findViewById(R.id.et_password);
+        et_name=rootView.findViewById(R.id.et_name);
+        et_repassword=rootView.findViewById(R.id.et_repassword);
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbHandler = new DBHandler(getContext());
+                String password = et_password.getText().toString();
+                String repassword = et_repassword.getText().toString();
+                String username = et_name.getText().toString();
+                String email = et_email.getText().toString();
+                if (email.isEmpty() || password.isEmpty() || username.isEmpty() || repassword.isEmpty()){
+                    Toast.makeText(getActivity(), "ALL INPUTS ARE REQUIRED! ", Toast.LENGTH_LONG).show();
+                }else{
+                    if(email.contains(".com") && email.contains("@") && email.length()>12 && username.length()>4 ){
+                        if(password.equals(repassword)) {
+                            Toast.makeText(getActivity(), "User Has Been Registered! ", Toast.LENGTH_SHORT).show();
+                            dbHandler.registerUser(username,email,password);
+                        }else{
+                            Toast.makeText(getActivity(), "Password Doesn't Matched!", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getActivity(), "Invalid email or username!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                et_name.setText("");
+                et_email.setText("");
+                et_password.setText("");
+                et_repassword.setText("");
+
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        return rootView;
     }
 }

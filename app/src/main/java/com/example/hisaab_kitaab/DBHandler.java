@@ -43,8 +43,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 + DATE_COL + " TEXT,"
                 + AMOUNT_COL + " TEXT,"
                 + TRANSACTION_COL + "TEXT,"
-                + PARENT_COL +" INTEGER,"
-                + "FOREIGN KEY("+ PARENT_COL + ")" + "REFERENCES " +PARENT_TABLE+ "("+ID_COL+")"+");";
+                + PARENT_COL +" TEXT,"
+                + "FOREIGN KEY("+ PARENT_COL + ")" + "REFERENCES " +PARENT_TABLE+ "("+EMAIL_COL+")"+");";
 
         db.execSQL(query2);
     }
