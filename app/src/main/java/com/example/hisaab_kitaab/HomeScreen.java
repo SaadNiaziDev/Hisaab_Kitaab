@@ -55,6 +55,8 @@ public class HomeScreen extends AppCompatActivity {
                         });
                 builder.show();
             }
+
+
         });
         khataModelArrayList = new ArrayList<>();
         dbHandler = new DBHandler(HomeScreen.this);
