@@ -50,6 +50,10 @@ public class fragment_register extends Fragment {
                     if(email.contains(".com") && email.contains("@") && email.length()>12 && username.length()>4 ){
                         if(password.equals(repassword)) {
                             Toast.makeText(getActivity(), "User Has Been Registered! ", Toast.LENGTH_SHORT).show();
+                            et_name.setText("");
+                            et_email.setText("");
+                            et_password.setText("");
+                            et_repassword.setText("");
                             dbHandler.registerUser(username,email,password);
                         }else{
                             Toast.makeText(getActivity(), "Password Doesn't Matched!", Toast.LENGTH_SHORT).show();
@@ -59,10 +63,7 @@ public class fragment_register extends Fragment {
                     }
                 }
 
-                et_name.setText("");
-                et_email.setText("");
-                et_password.setText("");
-                et_repassword.setText("");
+
 
             }
         });

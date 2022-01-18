@@ -20,7 +20,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="306dp"
             android:layout_height="477dp"
-            app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintBottom_toTopOf="@+id/add_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -76,12 +76,12 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/add_btn"
             android:layout_width="200dp"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/btn_custom"
-            android:text="Button"
+            android:text="@string/add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
