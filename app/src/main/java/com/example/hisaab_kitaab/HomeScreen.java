@@ -9,15 +9,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+
+import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ArrayList<KhataModel> khataModelArrayList;
     private DBHandler dbHandler;
@@ -35,24 +41,38 @@ public class HomeScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(HomeScreen.this);
-                // Get the layout inflater
                 LayoutInflater inflater = getLayoutInflater();
-
-                // Inflate and set the layout for the dialog
-                // Pass null as the parent view because its going in the dialog layout
-                builder.setView(inflater.inflate(R.layout.dialog_signin, null))
-                        // Add action buttons
-                        .setPositiveButton("add", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                // sign in the user ...
+                builder.setView(inflater.inflate(R.layout.dialog_signin, null));
+                builder.setNeutralButton("pick", new OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        EditText et_recipient = findViewById(R.id.et_recipient);
+                        EditText et_date=findViewById(R.id.et_date);
+                        EditText et_amount=findViewById(R.id.et_amount);
+                        Button pick = findViewById(R.id.pickBtn);
+                        ChipGroup type = findViewById(R.id.type_group);
+                        final Calendar newCalendar = Calendar.getInstance();
+                        final DatePickerDialog  StartTime = new DatePickerDialog(HomeScreen.this, new DatePickerDialog.OnDateSetListener() {
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                Calendar newDate = Calendar.getInstance();
+                                newDate.set(year, monthOfYear, dayOfMonth);
+                                et_date.setText((CharSequence) newDate.getTime());
                             }
-                        })
-                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.dismiss();
-                            }
-                        });
+                        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+                        StartTime.show();
+                    }
+                })
+                .setPositiveButton("add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        ;// Add action button
+                    }
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
                 builder.show();
             }
 
@@ -69,6 +89,11 @@ public class HomeScreen extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         recyclerView.setAdapter(rvAdapter);
+
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
     }
 }

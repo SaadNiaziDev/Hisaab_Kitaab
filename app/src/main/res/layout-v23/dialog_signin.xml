@@ -55,7 +55,7 @@
             tools:ignore="TextContrastCheck" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/pickBtn"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="Pick Date" />
@@ -79,11 +79,14 @@
         tools:ignore="TextContrastCheck" />
 
     <com.google.android.material.chip.ChipGroup
+        android:id="@+id/type_group"
         android:layout_width="302dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
-        app:chipSpacingHorizontal="100dp">
+        app:chipSpacingHorizontal="100dp"
+        app:singleLine="true"
+        app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_debit"
@@ -91,6 +94,8 @@
             android:layout_height="wrap_content"
             android:text="DEBIT"
             android:textAlignment="center"
+            app:checkedIconEnabled="false"
+            app:closeIconVisible="false"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.chip.Chip
