@@ -22,6 +22,7 @@
         android:layout_marginTop="11dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +36,7 @@
         android:layout_marginTop="73dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:text="Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
@@ -47,6 +49,7 @@
         android:layout_marginTop="58dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:text="Name"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
@@ -55,12 +58,11 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="50dp"
-        android:text="TextView"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="64dp"
+        android:text="email"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
-        app:layout_constraintStart_toStartOf="@+id/button3"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
