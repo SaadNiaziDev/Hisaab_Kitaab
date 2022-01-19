@@ -11,6 +11,7 @@
         android:background="#2A5D68"
         android:contentDescription="@string/app_name"
         android:scaleType="center"
+        app:srcCompat="@android:mipmap/sym_def_app_icon"
         tools:ignore="ImageContrastCheck"
         tools:srcCompat="@android:mipmap/sym_def_app_icon"
         tools:targetApi="m" />
@@ -33,13 +34,13 @@
         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/et_date"
-            android:layout_width="200dp"
+            android:layout_width="165dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -55,9 +56,9 @@
 
         <Button
             android:id="@+id/button4"
-            android:layout_width="150dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Button" />
+            android:text="Pick Date" />
 
     </LinearLayout>
 
