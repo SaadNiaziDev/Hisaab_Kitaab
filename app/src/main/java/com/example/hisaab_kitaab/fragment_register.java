@@ -1,11 +1,6 @@
 package com.example.hisaab_kitaab;
 
-import static android.icu.text.DisplayContext.LENGTH_SHORT;
-
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +8,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import com.example.hisaab_kitaab.models.Users;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class fragment_register extends Fragment {
 
+    FirebaseAuth auth;
+    FirebaseDatabase database;
     Button register;
     EditText et_email,et_password,et_repassword,et_name;
-    private DBHandler dbHandler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
     }
 
     @Override
@@ -39,7 +46,6 @@ public class fragment_register extends Fragment {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbHandler = new DBHandler(getContext());
                 String password = et_password.getText().toString();
                 String repassword = et_repassword.getText().toString();
                 String username = et_name.getText().toString();
@@ -54,7 +60,23 @@ public class fragment_register extends Fragment {
                             et_email.setText("");
                             et_password.setText("");
                             et_repassword.setText("");
-                            dbHandler.registerUser(username,email,password);
+                            auth.createUserWithEmailAndPassword(
+                                    email,
+                                    password
+                            ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if(task.isSuccessful()){
+                                        Users user = new Users(
+                                                username,
+                                                email,
+                                                password
+                                        );
+                                        String id = task.getResult().getUser().getUid();
+                                        database.getReference().child("Users").child(id).setValue(user);
+                                    }
+                            }
+                            });
                         }else{
                             Toast.makeText(getActivity(), "Password Doesn't Matched!", Toast.LENGTH_SHORT).show();
                         }

@@ -1,26 +1,20 @@
 package com.example.hisaab_kitaab;
 
-import static androidx.appcompat.app.AlertDialog.*;
-import static com.google.android.material.internal.ContextUtils.getActivity;
-import static java.security.AccessController.getContext;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TextView;
-
+import com.example.hisaab_kitaab.models.Khata;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
@@ -28,7 +22,7 @@ import java.util.Calendar;
 
 public class HomeScreen extends AppCompatActivity {
 
-    private ArrayList<KhataModel> khataModelArrayList;
+    private ArrayList<Khata> khataArrayList;
     private DBHandler dbHandler;
     private RVAdapter rvAdapter;
     private RecyclerView recyclerView;
@@ -92,11 +86,11 @@ public class HomeScreen extends AppCompatActivity {
 
 
         });
-        khataModelArrayList = new ArrayList<>();
+        khataArrayList = new ArrayList<>();
         dbHandler = new DBHandler(HomeScreen.this);
-        khataModelArrayList = dbHandler.readRecords();
+        khataArrayList = dbHandler.readRecords();
 
-        rvAdapter=new RVAdapter(khataModelArrayList,HomeScreen.this);
+        rvAdapter=new RVAdapter(khataArrayList,HomeScreen.this);
         recyclerView = findViewById(R.id.recyclerView);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HomeScreen.this,RecyclerView.VERTICAL,false);

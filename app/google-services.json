@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "250966916938",
+    "project_id": "hissab-kitaab-92265",
+    "storage_bucket": "hissab-kitaab-92265.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250966916938:android:98ce0a73c9e72395744bb3",
+        "android_client_info": {
+          "package_name": "com.example.hisaab_kitaab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250966916938-p15l7o5ds0l48o6i9s5tvbf8hpr7rbo3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmQ-YJn0IE-FTEknEhX_kyY2ruEALNjOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "250966916938-p15l7o5ds0l48o6i9s5tvbf8hpr7rbo3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

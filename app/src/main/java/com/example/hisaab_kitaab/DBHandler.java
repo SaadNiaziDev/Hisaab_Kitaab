@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.hisaab_kitaab.models.Khata;
+
 import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -77,17 +79,17 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<KhataModel> readRecords() {
+    public ArrayList<Khata> readRecords() {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursorCourses = db.rawQuery("SELECT * FROM " + CHILD_TABLE, null);
 
-        ArrayList<KhataModel> courseModalArrayList = new ArrayList<>();
+        ArrayList<Khata> courseModalArrayList = new ArrayList<>();
 
         if (cursorCourses.moveToFirst()) {
             do {
-                courseModalArrayList.add(new KhataModel(cursorCourses.getString(1),
+                courseModalArrayList.add(new Khata(cursorCourses.getString(1),
                         cursorCourses.getString(3),
                         cursorCourses.getString(2),
                         cursorCourses.getString(4),

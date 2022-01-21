@@ -1,9 +1,6 @@
-package com.example.hisaab_kitaab;
+package com.example.hisaab_kitaab.models;
 
-public class KhataModel {
-    private String name;
-    private String email;
-    private String password;
+public class Khata {
     private String recipient;
     private String amount;
     private String date;
@@ -15,20 +12,8 @@ public class KhataModel {
         this.amount = amount;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setImage(String image) {
@@ -45,17 +30,6 @@ public class KhataModel {
 
     //getters-------------------------------------------
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 
     public String getRecipient() {
         return recipient;
@@ -77,13 +51,9 @@ public class KhataModel {
         return type;
     }
 
-    public KhataModel(String email, String password, String name){
-        setEmail(email);
-        setPassword(password);
-        setName(name);
-    }
 
-    public KhataModel(String recipient,  String date, String image, String type,String amount){
+
+    public Khata(String recipient, String date, String image, String type, String amount){
         setRecipient(recipient);
         setAmount(amount);
         setDate(date);
