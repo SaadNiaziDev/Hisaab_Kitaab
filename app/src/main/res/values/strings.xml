@@ -13,4 +13,11 @@
     <string name="your_name">Full Name</string>
     <string name="add">ADD</string>
     <string name="recipient">Recipient</string>
+    <string name="date">Date</string>
+    <string name="amount">Amount</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="debit">DEBIT</string>
+    <string name="credit">CREDIT</string>
+    <string name="cancel">cancel</string>
+
 </resources>

@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,19 +19,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class HomeScreen extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class HomeScreen extends AppCompatActivity {
 
     private ArrayList<KhataModel> khataModelArrayList;
     private DBHandler dbHandler;
     private RVAdapter rvAdapter;
     private RecyclerView recyclerView;
     Button add_btn;
+    EditText et_amount,et_date,et_recipient;
+    ChipGroup chipGroup;
+    TextView tv_date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,38 +48,46 @@ public class HomeScreen extends AppCompatActivity implements DatePickerDialog.On
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(HomeScreen.this);
                 LayoutInflater inflater = getLayoutInflater();
-                builder.setView(inflater.inflate(R.layout.dialog_signin, null));
-                builder.setNeutralButton("pick", new OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        EditText et_recipient = findViewById(R.id.et_recipient);
-                        EditText et_date=findViewById(R.id.et_date);
-                        EditText et_amount=findViewById(R.id.et_amount);
-                        Button pick = findViewById(R.id.pickBtn);
-                        ChipGroup type = findViewById(R.id.type_group);
-                        final Calendar newCalendar = Calendar.getInstance();
-                        final DatePickerDialog  StartTime = new DatePickerDialog(HomeScreen.this, new DatePickerDialog.OnDateSetListener() {
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                Calendar newDate = Calendar.getInstance();
-                                newDate.set(year, monthOfYear, dayOfMonth);
-                                et_date.setText((CharSequence) newDate.getTime());
+                View rootview = inflater.inflate(R.layout.dialog_signin, null);
+                builder.setView(rootview);
+                builder.setPositiveButton("add", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                // sign in the user ...
                             }
-                        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-                        StartTime.show();
-                    }
-                })
-                .setPositiveButton("add", new DialogInterface.OnClickListener() {
+                        });
+                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                builder.show();
+                et_recipient = rootview.findViewById(R.id.et_recipient);
+                et_date=(EditText) rootview.findViewById(R.id.et_date);
+                et_amount=rootview.findViewById(R.id.et_amount);
+                chipGroup = rootview.findViewById(R.id.type_group);
+                // perform click event on edit text
+                et_date.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        ;// Add action button
-                    }
-                })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
+                    public void onClick(View v) {
+                        // calender class's instance and get current date , month and year from calender
+                        final Calendar c = Calendar.getInstance();
+                        int mYear = c.get(Calendar.YEAR); // current year
+                        int mMonth = c.get(Calendar.MONTH); // current month
+                        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                        // date picker dialog
+                      DatePickerDialog datePickerDialog = new DatePickerDialog(HomeScreen.this,
+                                (view1, year, monthOfYear, dayOfMonth) -> {
+                                    // set day of month , month and year value in the edit text
+                                    et_date.setText(dayOfMonth + "/"
+                                            + (monthOfYear + 1) + "/" + year);
+
+                                }, mYear, mMonth, mDay);
+                        datePickerDialog.show();
                     }
                 });
-                builder.show();
+
             }
 
 
@@ -89,11 +103,6 @@ public class HomeScreen extends AppCompatActivity implements DatePickerDialog.On
         recyclerView.setLayoutManager(linearLayoutManager);
 
         recyclerView.setAdapter(rvAdapter);
-
-    }
-
-    @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
 
     }
 }

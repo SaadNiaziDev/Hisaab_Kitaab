@@ -1,5 +1,7 @@
 package com.example.hisaab_kitaab;
 
+import static android.icu.text.DisplayContext.LENGTH_SHORT;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -29,9 +31,9 @@ public class fragment_register extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_register, container, false);
         register = rootView.findViewById(R.id.btn_register);
-        et_email= rootView.findViewById(R.id.et_amount);
-        et_password=rootView.findViewById(R.id.et_date);
-        et_name=rootView.findViewById(R.id.et_recipient);
+        et_email= rootView.findViewById(R.id.et_email);
+        et_password=rootView.findViewById(R.id.et_password);
+        et_name=rootView.findViewById(R.id.et_name);
         et_repassword=rootView.findViewById(R.id.et_repassword);
 
         register.setOnClickListener(new View.OnClickListener() {
