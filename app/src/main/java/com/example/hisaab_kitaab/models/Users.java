@@ -5,10 +5,10 @@ public class Users {
     private String email;
     private String password;
 
-    public Users(String email, String password, String name){
+    public Users(String name, String email, String password){
+        setName(name);
         setEmail(email);
         setPassword(password);
-        setName(name);
     }
 
     public void setName(String name) {

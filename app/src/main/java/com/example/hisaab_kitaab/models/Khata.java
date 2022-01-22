@@ -4,7 +4,6 @@ public class Khata {
     private String recipient;
     private String amount;
     private String date;
-    private String image;
     private String type;
 
     //setters------------------------------------
@@ -16,9 +15,6 @@ public class Khata {
         this.date = date;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public void setRecipient(String recipient) {
         this.recipient = recipient;
@@ -39,9 +35,6 @@ public class Khata {
         return date;
     }
 
-    public String getImage() {
-        return image;
-    }
 
     public String getAmount() {
         return amount;
@@ -53,12 +46,10 @@ public class Khata {
 
 
 
-    public Khata(String recipient, String date, String image, String type, String amount){
+    public Khata(String recipient, String date, String amount){
         setRecipient(recipient);
         setAmount(amount);
         setDate(date);
-        setImage(image);
-        setType(type);
     }
 
 

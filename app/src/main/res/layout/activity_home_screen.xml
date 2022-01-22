@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_user"
             android:layout_width="144dp"
             android:layout_height="47dp"
             android:layout_marginStart="32dp"
@@ -36,17 +36,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab2"
+        <Button
+            android:id="@+id/logout_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="28dp"
-            android:src="@android:drawable/ic_lock_power_off"
-            app:backgroundTint="?android:attr/textColorPrimaryInverseNoDisable"
+            android:text="logout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:layout_width="318dp"

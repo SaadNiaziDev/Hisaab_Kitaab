@@ -12,8 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class fragment_login extends Fragment {
     FirebaseAuth auth;
-    FirebaseDatabase database;
     Button loginBtn;
     String name;
     EditText email,password;
@@ -41,42 +38,27 @@ public class fragment_login extends Fragment {
         email=rootView.findViewById(R.id.et_email);
         password=rootView.findViewById(R.id.et_password);
         loginBtn= rootView.findViewById(R.id.btn_login);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                auth.signInWithEmailAndPassword(
-                        email.getText().toString(),
-                        password.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener() {
+        loginBtn.setOnClickListener(view -> auth.signInWithEmailAndPassword(
+                email.getText().toString(),
+                password.getText().toString())
+                .addOnCompleteListener(task -> {
+                    if(task.isSuccessful()){
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("username");
+                        ref.addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onComplete(@NonNull Task task) {
-                                if(task.isSuccessful()){
-                                    DatabaseReference ref = database.getReference().child("username");
-                                    ref.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            name=snapshot.getValue().toString();
-                                        }
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            }
 
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-                                            Toast.makeText(getActivity(), "Problem Occured While logging In!",Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                    Intent intent = new Intent(getContext(),HomeScreen.class);
-                                    intent.putExtra("username", name);
-                                    goToAttract(view);
-                                }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(getActivity(), "Problem Occurred While logging In!",Toast.LENGTH_SHORT).show();
                             }
                         });
-            }
-        });
+                        Intent intent = new Intent(getContext(),HomeScreen.class);
+                        startActivity(intent);
+                    }
+                }));
         return rootView;
     }
 
-    public void goToAttract(View v)
-    {
-        Intent intent = new Intent(getContext(), HomeScreen.class);
-        startActivity(intent);
-    }
 }
