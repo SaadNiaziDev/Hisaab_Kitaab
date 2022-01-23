@@ -1,4 +1,4 @@
-package com.example.hisaab_kitaab.models;
+package com.example.hisaab_kitaab;
 
 public class Users {
     private String name;

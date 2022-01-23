@@ -12,18 +12,23 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hisaab_kitaab.models.Khata;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -33,13 +38,13 @@ public class HomeScreen extends AppCompatActivity {
     FirebaseUser user;
     FirebaseAuth auth;
     int counter ;
-    FirebaseDatabase database;
+    DatabaseReference databaseReference;
     Button add_btn,logout_btn;
     EditText et_amount,et_date,et_recipient;
     RadioGroup radioGroup;
     TextView tv_user;
     String userId;
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint({"NonConstantResourceId", "NotifyDataSetChanged"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,15 +106,28 @@ public class HomeScreen extends AppCompatActivity {
 
         });
         khataArrayList = new ArrayList<>();
-        //khataArrayList = dbHandler.readRecords();
-
-        rvAdapter = new RVAdapter(khataArrayList, HomeScreen.this);
         recyclerView = findViewById(R.id.recyclerView);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HomeScreen.this, RecyclerView.VERTICAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-
+        rvAdapter = new RVAdapter(khataArrayList, HomeScreen.this);
         recyclerView.setAdapter(rvAdapter);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child("Khata");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds:snapshot.getChildren()) {
+                    Khata ks = ds.getValue(Khata.class);
+                    khataArrayList.add(ks);
+                }
+                rvAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }

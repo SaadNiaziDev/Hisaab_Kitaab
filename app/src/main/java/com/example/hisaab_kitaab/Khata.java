@@ -1,4 +1,4 @@
-package com.example.hisaab_kitaab.models;
+package com.example.hisaab_kitaab;
 
 public class Khata {
     private String recipient;
@@ -53,5 +53,8 @@ public class Khata {
         setType(type);
     }
 
+    public Khata(){
+
+    }
 
 }
