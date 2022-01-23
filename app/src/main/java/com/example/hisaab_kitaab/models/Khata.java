@@ -46,10 +46,11 @@ public class Khata {
 
 
 
-    public Khata(String recipient, String date, String amount){
+    public Khata(String recipient, String date, String amount, String type){
         setRecipient(recipient);
         setAmount(amount);
         setDate(date);
+        setType(type);
     }
 
 

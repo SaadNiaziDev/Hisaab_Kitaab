@@ -33,29 +33,22 @@
         android:textSize="15sp"
         tools:ignore="TextContrastCheck,TextContrastCheck" />
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/et_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/et_date"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/et_custom"
-            android:fontFamily="@font/roboto_regular"
-            android:focusable="false"
-            android:hint="@string/date"
-            android:importantForAutofill="no"
-            android:inputType="date|datetime|time"
-            android:padding="15dp"
-            android:textSize="15sp"
-            tools:ignore="TextContrastCheck" />
-
-    </LinearLayout>
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/et_custom"
+        android:focusable="false"
+        android:fontFamily="@font/roboto_regular"
+        android:hint="@string/date"
+        android:importantForAutofill="no"
+        android:inputType="date|datetime|time"
+        android:padding="15dp"
+        android:textSize="15sp"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/et_amount"
@@ -73,33 +66,25 @@
         android:textSize="15sp"
         tools:ignore="TextContrastCheck" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/type_group"
-        android:layout_width="302dp"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="390dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        app:chipSpacingHorizontal="100dp"
-        app:singleLine="true"
-        app:singleSelection="true">
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="40dp">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipDebit"
-            android:layout_width="100dp"
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="147dp"
             android:layout_height="wrap_content"
-            android:text="@string/debit"
-            android:textAlignment="center"
-            app:checkedIconEnabled="false"
-            app:closeIconVisible="false"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:text="@string/you_will_get" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chipCredit"
-            android:layout_width="100dp"
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/credit"
-            android:textAlignment="center"
-            tools:ignore="TouchTargetSizeCheck" />
-    </com.google.android.material.chip.ChipGroup>
+            android:text="@string/you_will_pay" />
+    </RadioGroup>
 
 </LinearLayout>

@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hisaab_kitaab.models.Khata;
-import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,12 +32,14 @@ public class HomeScreen extends AppCompatActivity {
     private RecyclerView recyclerView;
     FirebaseUser user;
     FirebaseAuth auth;
+    int counter ;
     FirebaseDatabase database;
     Button add_btn,logout_btn;
     EditText et_amount,et_date,et_recipient;
-    ChipGroup chipGroup;
+    RadioGroup radioGroup;
     TextView tv_user;
-    String userId,username;
+    String userId;
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +48,6 @@ public class HomeScreen extends AppCompatActivity {
         if (user != null) {
             userId = user.getUid();
         }
-        ;
         tv_user = findViewById(R.id.tv_user);
         logout_btn = findViewById(R.id.logout_btn);
         add_btn = findViewById(R.id.add_btn);
@@ -58,17 +60,19 @@ public class HomeScreen extends AppCompatActivity {
                 String recipient = et_recipient.getText().toString();
                 String date = et_date.getText().toString();
                 String amount = et_amount.getText().toString();
-                //String selectedChipText = chipGroup.findViewById(chipGroup.getCheckedChipId()).toString();
+                RadioButton rb = rootview.findViewById(radioGroup.getCheckedRadioButtonId());
+                CharSequence type = rb.getText();
                 if (recipient.isEmpty() || date.isEmpty() || amount.isEmpty() ) {
                     Toast.makeText(getApplicationContext(), "Please fill all fields!", Toast.LENGTH_SHORT).show();
                 } else {
                     Khata khata = new Khata(
                             recipient,
                             date,
-                            amount
-                            //selectedChipText
+                            amount,
+                            (String) type
                     );
-                    FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Khata").setValue(khata);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Khata").child(String.valueOf(counter)).setValue(khata);
+                    counter++;
                 }
             });
             builder.setNegativeButton("cancel", (dialog, id) -> dialog.dismiss());
@@ -77,8 +81,7 @@ public class HomeScreen extends AppCompatActivity {
             et_recipient = rootview.findViewById(R.id.et_recipient);
             et_date =  rootview.findViewById(R.id.et_date);
             et_amount = rootview.findViewById(R.id.et_amount);
-            chipGroup = rootview.findViewById(R.id.type_group);
-            // perform click event on edit text
+            radioGroup = rootview.findViewById(R.id.radioGroup);
             et_date.setOnClickListener(v -> {
                 // calender class's instance and get current date , month and year from calender
                 final Calendar c = Calendar.getInstance();

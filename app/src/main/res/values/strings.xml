@@ -19,5 +19,7 @@
     <string name="debit">DEBIT</string>
     <string name="credit">CREDIT</string>
     <string name="cancel">cancel</string>
+    <string name="you_will_pay">You will pay</string>
+    <string name="you_will_get">You will get</string>
 
 </resources>
