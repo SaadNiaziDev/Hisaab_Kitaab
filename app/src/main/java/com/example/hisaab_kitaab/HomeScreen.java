@@ -2,6 +2,7 @@ package com.example.hisaab_kitaab;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,17 +45,22 @@ public class HomeScreen extends AppCompatActivity {
     RadioGroup radioGroup;
     TextView tv_user;
     String userId;
-    @SuppressLint({"NonConstantResourceId", "NotifyDataSetChanged"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        tv_user = findViewById(R.id.tv_user);
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             userId = user.getUid();
+            tv_user.setText(user.getEmail());
         }
-        tv_user = findViewById(R.id.tv_user);
         logout_btn = findViewById(R.id.logout_btn);
+        logout_btn.setOnClickListener(view -> {
+           FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+        });
         add_btn = findViewById(R.id.add_btn);
         add_btn.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(HomeScreen.this);
@@ -66,8 +72,8 @@ public class HomeScreen extends AppCompatActivity {
                 String date = et_date.getText().toString();
                 String amount = et_amount.getText().toString();
                 RadioButton rb = rootview.findViewById(radioGroup.getCheckedRadioButtonId());
-                CharSequence type = rb.getText();
-                if (recipient.isEmpty() || date.isEmpty() || amount.isEmpty() ) {
+                String type = (String) rb.getText();
+                if (recipient.isEmpty() || date.isEmpty() || amount.isEmpty() || type.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please fill all fields!", Toast.LENGTH_SHORT).show();
                 } else {
                     Khata khata = new Khata(
@@ -76,8 +82,10 @@ public class HomeScreen extends AppCompatActivity {
                             amount,
                             (String) type
                     );
-                    FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Khata").child(String.valueOf(counter)).setValue(khata);
+                    FirebaseDatabase.getInstance().getReference().child("Users").child(userId).child("Khata").push().setValue(khata);
                     counter++;
+                    fetchData();
+
                 }
             });
             builder.setNegativeButton("cancel", (dialog, id) -> dialog.dismiss());
@@ -105,6 +113,10 @@ public class HomeScreen extends AppCompatActivity {
             });
 
         });
+        fetchData();
+    }
+
+    public void fetchData(){
         khataArrayList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -128,6 +140,5 @@ public class HomeScreen extends AppCompatActivity {
 
             }
         });
-
     }
 }
