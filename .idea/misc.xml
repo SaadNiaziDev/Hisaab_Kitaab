@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/layout/activity_home_screen.xml" value="0.14" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10597826086956522" />
         <entry key="app/src/main/res/layout/dialog_signin.xml" value="0.10597826086956522" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.10597826086956522" />
       </map>
     </option>
   </component>

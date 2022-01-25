@@ -49,28 +49,32 @@ public class fragment_register extends Fragment {
                 Toast.makeText(getActivity(), "ALL INPUTS ARE REQUIRED! ", Toast.LENGTH_LONG).show();
             }else{
                 if(email.contains(".com") && email.contains("@") && email.length()>12 && username.length()>4 ){
-                    if(password.equals(repassword)) {
-                        Toast.makeText(getActivity(), "User Has Been Registered! ", Toast.LENGTH_SHORT).show();
-                        et_name.setText("");
-                        et_email.setText("");
-                        et_password.setText("");
-                        et_repassword.setText("");
-                        auth.createUserWithEmailAndPassword(
-                                email,
-                                password
-                        ).addOnCompleteListener(task -> {
-                            if(task.isSuccessful()){
-                                Users user = new Users(
-                                        username,
-                                        email,
-                                        password
-                                );
-                                String id = Objects.requireNonNull(task.getResult().getUser()).getUid();
-                                database.getReference().child("Users").child(id).setValue(user);
-                            }
-                    });
+                    if(password.length()>6) {
+                        if (password.equals(repassword)) {
+                            Toast.makeText(getActivity(), "User Has Been Registered! ", Toast.LENGTH_SHORT).show();
+                            et_name.setText("");
+                            et_email.setText("");
+                            et_password.setText("");
+                            et_repassword.setText("");
+                            auth.createUserWithEmailAndPassword(
+                                    email,
+                                    password
+                            ).addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    Users user = new Users(
+                                            username,
+                                            email,
+                                            password
+                                    );
+                                    String id = Objects.requireNonNull(task.getResult().getUser()).getUid();
+                                    database.getReference().child("Users").child(id).setValue(user);
+                                }
+                            });
+                        } else {
+                            Toast.makeText(getActivity(), "Password Doesn't Matched!", Toast.LENGTH_SHORT).show();
+                        }
                     }else{
-                        Toast.makeText(getActivity(), "Password Doesn't Matched!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Password must have atleast 7 characters", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     Toast.makeText(getActivity(), "Invalid email or username!", Toast.LENGTH_SHORT).show();
