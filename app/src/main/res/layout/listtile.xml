@@ -48,7 +48,8 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-condensed"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
