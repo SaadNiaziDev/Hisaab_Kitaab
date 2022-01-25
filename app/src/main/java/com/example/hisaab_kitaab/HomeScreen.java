@@ -38,13 +38,14 @@ public class HomeScreen extends AppCompatActivity {
     private RecyclerView recyclerView;
     FirebaseUser user;
     FirebaseAuth auth;
-    int counter ;
+    int counter;
     DatabaseReference databaseReference;
-    Button add_btn,logout_btn;
-    EditText et_amount,et_date,et_recipient;
+    Button add_btn, logout_btn;
+    EditText et_amount, et_date, et_recipient;
     RadioGroup radioGroup;
     TextView tv_user;
     String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +54,24 @@ public class HomeScreen extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             userId = user.getUid();
-            tv_user.setText(user.getEmail());
         }
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).child("name");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String uName = (String) snapshot.getValue(Boolean.parseBoolean(Users.class.getName()));
+                tv_user.setText(uName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         logout_btn = findViewById(R.id.logout_btn);
         logout_btn.setOnClickListener(view -> {
-           FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(this,MainActivity.class);
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
         add_btn = findViewById(R.id.add_btn);
@@ -92,7 +105,7 @@ public class HomeScreen extends AppCompatActivity {
 
             builder.show();
             et_recipient = rootview.findViewById(R.id.et_recipient);
-            et_date =  rootview.findViewById(R.id.et_date);
+            et_date = rootview.findViewById(R.id.et_date);
             et_amount = rootview.findViewById(R.id.et_amount);
             radioGroup = rootview.findViewById(R.id.radioGroup);
             et_date.setOnClickListener(v -> {
@@ -116,7 +129,7 @@ public class HomeScreen extends AppCompatActivity {
         fetchData();
     }
 
-    public void fetchData(){
+    public void fetchData() {
         khataArrayList = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -128,7 +141,7 @@ public class HomeScreen extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds:snapshot.getChildren()) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     Khata ks = ds.getValue(Khata.class);
                     khataArrayList.add(ks);
                 }

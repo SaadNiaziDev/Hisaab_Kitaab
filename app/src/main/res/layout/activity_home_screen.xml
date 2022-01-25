@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ic_launcher_background"
     tools:context=".HomeScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,6 +21,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="416dp"
             android:layout_height="527dp"
+            android:background="@color/ic_launcher_background"
             app:layout_constraintBottom_toTopOf="@+id/add_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,9 +33,8 @@
             android:layout_height="47dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
-            android:fontFamily="sans-serif-black"
-            android:text="USERNAME"
-            android:textSize="20sp"
+            android:fontFamily="@font/indigo_daisy"
+            android:textSize="48sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="28dp"
+            android:backgroundTint="#158379"
             android:text="logout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +54,7 @@
             android:layout_width="200dp"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/btn_custom"
+            android:backgroundTint="#158379"
             android:text="@string/add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
