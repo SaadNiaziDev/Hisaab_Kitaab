@@ -34,7 +34,7 @@ public class fragment_login extends Fragment {
         loginBtn = rootView.findViewById(R.id.btn_login);
         loginBtn.setOnClickListener(view -> {
             if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-                Toast.makeText(getActivity(), "Invalid Credentials!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "All inputs are required!", Toast.LENGTH_SHORT).show();
             } else {
                 auth.signInWithEmailAndPassword( // email and psswd verification
                         email.getText().toString(),
